@@ -280,15 +280,28 @@ seleciona :: [t] -> [Int] -> [t]
 seleciona [] _ = []
 seleciona _ [] = []
 seleciona as bs = map (\ b -> as !! b ) bs
+
 -- 32. palindrome?: recebe uma string e verifica se ela é uma palíndrome ou nao
 -- ex.:
 -- (palindrome? "ana") ==> #t
 -- (palindrome? "abbccbba") ==> #t
 -- (palindrome? "abbdbbaa") ==> #f
-
+palindrome :: [Char] -> Bool
+palindrome [] = True
+palindrome [a] = True
+palindrome (c:string) = _isMirrored c string && palindrome (init string)
+    where
+        _isMirrored c string = c == last string
 
 -- 33. primo?: verifica se um número é primo ou não
-
+isPrimo :: Int -> Bool
+isPrimo 0 = False
+isPrimo 1 = True
+isPrimo 2 = True
+isPrimo n
+    | mod n 2 == 0 = False
+    | length ( filter (\ d -> mod n d == 0 ) [1,3..n] ) > 2 = False
+    | otherwise = True
 
 -- 34. soma-digitos: recebe um número natural e retorna a soma de seus dígitos
 -- ex.:
